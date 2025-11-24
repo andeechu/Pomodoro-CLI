@@ -17,18 +17,18 @@ def progress_bar(progress: int, total: int, seconds: int, minutes: int) -> None:
     print(f'\r POMO |{bar}| [{minutes:02}:{seconds:02}] [{percent:.0f}%] \N{Tomato}', end='\r')
 
 # Hides the cursor within the console
-def hide_cursor():
+def hide_cursor() -> None:
     print('\033[?25l', end='')
 
 # Displays the cursor within the console
-def show_cursor():
+def show_cursor() -> None:
     print('\033[?25h', end='')
 
 # Clearing console
 os.system('clear')
 
 # Boolean flag to control the timer
-is_continue = True
+is_continue: bool = True
 
 # Variable to store user input as an integer (minutes)
 my_time: int = 60 * int(sys.argv[1])
@@ -40,14 +40,14 @@ hide_cursor()
 while (is_continue):
 
     # Variable to store current timer progress
-    progress_counter = 0
+    progress_counter: int = 0
 
     # Using range(start, stop, step)
     # Reverse for loop that decrements by one (based on time value provided by the user)
     for x in range(my_time, -1, -1):
-        seconds = x % 60
-        minutes = int(x / 60) % 60
-        hours = int(x / 3600)
+        seconds: int = x % 60
+        minutes: int = int(x / 60) % 60
+        hours: int = int(x / 3600)
         # Alternate way to display the timer
         # print(f'{hours:02}:{minutes:02}:{seconds:02}', end='\r')
         progress_bar(progress_counter, my_time, seconds, minutes)
@@ -60,7 +60,7 @@ while (is_continue):
     # Displaying cursor for user input
     show_cursor()
     # Prompting user to restart timer
-    yes_or_no = input(f'Continue \N{Tomato} ? ')
+    yes_or_no: str = input(f'Continue \N{Tomato} ? ')
     # Restarts timer if input is valid
     is_continue = True if yes_or_no in valid_input else False
     # Hiding cursor again
